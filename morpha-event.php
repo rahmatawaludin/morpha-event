@@ -51,9 +51,15 @@ include('me-taxonomies.php');
  */
 function edit_admin_menus() {
     global $menu, $submenu;
-    // @todo : query for booking with status waiting confirmation
+    $query = new WP_Query(
+      array(
+       'post_type' => array( 'morpha_event_booking')
+       ,'post_status' => array( 'draft' )
+      )
+    );
+    $bookings_pending_count = $query->post_count;
+
     // @todo : change quick edit status to custom status
-    $bookings_pending_count = 5;
     $morpha_event = 'edit.php?post_type=morpha_event';
     $morpha_event_booking = 'edit.php?post_type=morpha_event_booking';
 
