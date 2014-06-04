@@ -91,28 +91,8 @@ add_action('admin_head', 'change_quick_edit_status', 10, 2);
 function change_quick_edit_status() {
   global $post_type, $pagenow;
   if ($post_type == 'morpha_event_booking' && $pagenow = 'edit.php') {
-  ?>
-    <script type="text/javascript">
-      jQuery(document).ready(function() {
-        // Change status in quick edit
-        jQuery('select[name="_status"]')
-          .find('option')
-          .remove()
-          .end()
-          .append('<option value="draft">Waiting Confirmation</option>')
-          .append('<option value="confirmed">Confirmed</option>');
-
-        // Change draft label
-        var draftLabel = "Waiting Confirmation";
-        var selector = '#wpbody-content ul.subsubsub li.draft a';
-        var draftCount = jQuery(selector).text().split(' ')[1];
-        jQuery(selector).text(draftLabel + ' ' +draftCount);
-
-        // Change draft post-state
-        jQuery('#the-list span.post-state:contains("Draft")').text('Waiting Confirmation');
-      });
-    </script>
-  <?php
+    // enqueue script to fix display
+    wp_enqueue_script( 'booking-status', plugins_url( 'js/booking-status.js' , __FILE__ ), array(), '1.0.0', true );
   }
 }
 ?>
