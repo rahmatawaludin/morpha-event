@@ -95,4 +95,9 @@ function change_quick_edit_status() {
     wp_enqueue_script( 'booking-status', plugins_url( 'js/booking-status.js' , __FILE__ ), array(), '1.0.0', true );
   }
 }
+
+/**
+ * @todo: searching by title still not working, it should search by all booking meta
+ *
+ */
 ?>
