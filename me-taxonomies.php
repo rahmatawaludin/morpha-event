@@ -6,8 +6,7 @@ add_filter('piklist_taxonomies', 'morpha_event_type_category');
    $taxonomies[] = array(
       'post_type' => 'morpha_event'
       ,'name' => 'morpha_event_category'
-      ,'show_admin_column' => true
-      ,'hide_meta_box' => false
+      ,'hide_meta_box' => true
       ,'configuration' => array(
         'hierarchical' => true
         ,'labels' => piklist('taxonomy_labels', 'Category')
@@ -17,6 +16,7 @@ add_filter('piklist_taxonomies', 'morpha_event_type_category');
         ,'rewrite' => array(
           'slug' => 'event-category'
         )
+        ,'show_admin_column' => true
       )
     );
 return $taxonomies;
@@ -29,8 +29,7 @@ add_filter('piklist_taxonomies', 'morpha_event_type_location');
    $taxonomies[] = array(
       'post_type' => 'morpha_event'
       ,'name' => 'morpha_event_location'
-      ,'show_admin_column' => true
-      ,'hide_meta_box' => false
+      ,'hide_meta_box' => true
       ,'configuration' => array(
         'hierarchical' => true
         ,'labels' => piklist('taxonomy_labels', 'Location')
@@ -40,6 +39,7 @@ add_filter('piklist_taxonomies', 'morpha_event_type_location');
         ,'rewrite' => array(
           'slug' => 'event-location'
         )
+        ,'show_admin_column' => true
       )
     );
 return $taxonomies;

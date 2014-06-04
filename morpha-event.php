@@ -42,6 +42,7 @@ function my_init_function()
    }
   }
 }
-include('me-post-type.php');
+include('me-post-type-event.php');
+include('me-post-type-booking.php');
 include('me-taxonomies.php');
 ?>
