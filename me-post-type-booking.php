@@ -51,16 +51,24 @@ function morpha_event_booking_table_head( $defaults ) {
  * Fill custom field value
  */
 add_action('manage_morpha_event_booking_posts_custom_column', 'morpha_event_booking_table_content', 10, 2);
+
+// Filter for title
+add_filter('the_title', 'morpha_event_booking_title',10, 2);
+function morpha_event_booking_title($title, $id) {
+  if(get_post_type($id) == 'morpha_event_booking') {
+      return get_post_meta( $id, 'morpha_event_booking_prefix', true ) .
+      ' ' . get_post_meta( $id, 'morpha_event_booking_first_name', true ) .
+      ' ' . get_post_meta( $id, 'morpha_event_booking_last_name', true );
+   }
+  else {
+      return $title;
+  }
+}
+
+// custom field
 function morpha_event_booking_table_content( $column_name, $post_id ) {
 
-  // Fill event_date
   switch ($column_name) {
-    case 'title':
-      $first_name = $begin_date = get_post_meta( $post_id, 'morpha_event_booking_first_name', true );
-      $last_name = $begin_date = get_post_meta( $post_id, 'morpha_event_booking_last_name', true );
-      echo $first_name . ' ' . $last_name;
-      break;
-
     case 'booking_email':
       $email = get_post_meta( $post_id, 'morpha_event_booking_email', true );
       echo $email;

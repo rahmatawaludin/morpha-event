@@ -172,7 +172,6 @@ piklist('field', array(
     ,'label' => '* Email Address'
     ,'attributes' => array(
         'class' => 'text',
-        'email',
         'required'
     )
 ));
