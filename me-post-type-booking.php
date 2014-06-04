@@ -94,15 +94,21 @@ function change_quick_edit_status() {
   ?>
     <script type="text/javascript">
       jQuery(document).ready(function() {
+        // Change status in quick edit
         jQuery('select[name="_status"]')
           .find('option')
           .remove()
           .end()
           .append('<option value="draft">Waiting Confirmation</option>')
           .append('<option value="confirmed">Confirmed</option>');
+
+        // Change draft label
         var draftLabel = "Waiting Confirmation";
         var draftCount = jQuery('li.draft a').text().split(' ')[1];
         jQuery('li.draft a').text(draftLabel + ' ' +draftCount);
+
+        // Change draft post-state
+        jQuery('span.post-state:contains("Draft")').text('Waiting Confirmation');
       });
     </script>
   <?php
