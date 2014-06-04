@@ -58,8 +58,6 @@ function edit_admin_menus() {
       )
     );
     $bookings_pending_count = $query->post_count;
-
-    // @todo : change quick edit status to custom status
     $morpha_event = 'edit.php?post_type=morpha_event';
     $morpha_event_booking = 'edit.php?post_type=morpha_event_booking';
 

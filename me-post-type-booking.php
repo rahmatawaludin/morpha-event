@@ -85,3 +85,24 @@ function morpha_event_booking_table_content( $column_name, $post_id ) {
       break;
   }
 }
+
+// change quick edit to custom status
+add_action('admin_head', 'change_quick_edit_status', 10, 2);
+function change_quick_edit_status() {
+  global $post_type, $pagenow;
+  if ($post_type == 'morpha_event_booking' && $pagenow = 'edit.php') {
+  ?>
+    <script type="text/javascript">
+      jQuery(document).ready(function() {
+        jQuery('select[name="_status"]')
+          .find('option')
+          .remove()
+          .end()
+          .append('<option value="draft">Waiting Confirmation</option>')
+          .append('<option value="confirmed">Confirmed</option>');
+      });
+    </script>
+  <?php
+  }
+}
+?>
