@@ -100,6 +100,9 @@ function change_quick_edit_status() {
           .end()
           .append('<option value="draft">Waiting Confirmation</option>')
           .append('<option value="confirmed">Confirmed</option>');
+        var draftLabel = "Waiting Confirmation";
+        var draftCount = jQuery('li.draft a').text().split(' ')[1];
+        jQuery('li.draft a').text(draftLabel + ' ' +draftCount);
       });
     </script>
   <?php
