@@ -45,4 +45,43 @@ function my_init_function()
 include('me-post-type-event.php');
 include('me-post-type-booking.php');
 include('me-taxonomies.php');
+
+/**
+ * Add buble counter of total booking
+ */
+function edit_admin_menus() {
+    global $menu, $submenu;
+    // @todo : query for booking with status waiting confirmation
+    // @todo : change quick edit status to custom status
+    $bookings_pending_count = 5;
+    $morpha_event = 'edit.php?post_type=morpha_event';
+    $morpha_event_booking = 'edit.php?post_type=morpha_event_booking';
+
+    /**
+     * Add Total booking buble in event menu
+     */
+    foreach ($menu as $key => $menu_nav) {
+        if ($menu_nav[2] == $morpha_event) {
+            $menu[$key][0] .= ' <span class="update-plugins count-'.$bookings_pending_count.'"><span class="plugin-count">'.$bookings_pending_count.'</span></span>';
+        }
+    }
+
+    /**
+     * Rename All Booking to Bookings
+     * Add Total booking buble to Bookings
+     */
+    foreach ($submenu[$morpha_event] as $key => $submenu_nav) {
+        if ($submenu_nav[2] == $morpha_event_booking) {
+            $submenu[$morpha_event][$key][0] =
+                'Bookings ' . '<span class="update-plugins count-' .
+                $bookings_pending_count . '"><span class="plugin-count">' .
+                $bookings_pending_count . '</span></span>';
+        }
+    }
+}
+/**
+ * Implement Admin menu changes
+ */
+add_action( 'admin_menu', 'edit_admin_menus' );
+
 ?>
