@@ -8,7 +8,7 @@ Post Type: morpha_event
 piklist('field', array(
     'type' => 'select'
     ,'scope' => 'taxonomy'
-    ,'field' => 'morpha_event_location`'
+    ,'field' => 'morpha_event_location'
     ,'label' => 'Locations'
     ,'description' => 'Location will appear when they are added to this field.'
     ,'choices' => piklist(
