@@ -6,60 +6,42 @@ Description: Event management for Dunamis Human Capital
 Version: 1.0
 Author: @rahmatawaludin
 Author URI: http://twitter.com/rahmatawaludin
-License: GPL
+License: GPLv2
+Plugin Type: Piklist
 */
 
-/**
-* Registers a new post type
-* @uses $wp_post_types Inserts new post type object into the list
-*
-* @param string  Post type key, must not exceed 20 characters
-* @param array|string  See optional args description above.
-* @return object|WP_Error the registered post type object, or an error object
+/*
+Copyright (c) 2014, Rahmat Awaludin
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-// Register Custom Post Type
-function morpha_event_create_post_type() {
+// Check Piklist
+add_action('init', 'my_init_function');
+function my_init_function()
+{
+  if(is_admin())
+  {
+   include_once('class-piklist-checker.php');
 
-    $labels = array(
-        'name'                => _x( 'Events', 'Post Type General Name', 'text_domain' ),
-        'singular_name'       => _x( 'Event', 'Post Type Singular Name', 'text_domain' ),
-        'menu_name'           => __( 'Events', 'text_domain' ),
-        'parent_item_colon'   => __( 'Parent Event:', 'text_domain' ),
-        'all_items'           => __( 'All Events', 'text_domain' ),
-        'view_item'           => __( 'View Event', 'text_domain' ),
-        'add_new_item'        => __( 'Add New Event', 'text_domain' ),
-        'add_new'             => __( 'Add Event', 'text_domain' ),
-        'edit_item'           => __( 'Edit Event', 'text_domain' ),
-        'update_item'         => __( 'Update Event', 'text_domain' ),
-        'search_items'        => __( 'Search Event', 'text_domain' ),
-        'not_found'           => __( 'Event not found', 'text_domain' ),
-        'not_found_in_trash'  => __( 'Event not found in Trash', 'text_domain' ),
-    );
-    $args = array(
-        'label'               => __( 'morpha_event', 'text_domain' ),
-        'description'         => __( 'Event', 'text_domain' ),
-        'labels'              => $labels,
-        'supports'            => array( 'title', 'custom-fields', 'page-attributes', ),
-        'taxonomies'          => array( 'category' ),
-        'hierarchical'        => false,
-        'public'              => true,
-        'show_ui'             => true,
-        'show_in_menu'        => true,
-        'show_in_nav_menus'   => true,
-        'show_in_admin_bar'   => true,
-        'menu_position'       => 5,
-        'menu_icon'           => '',
-        'can_export'          => true,
-        'has_archive'         => true,
-        'exclude_from_search' => false,
-        'publicly_queryable'  => true,
-        'capability_type'     => 'page',
-    );
-    register_post_type( 'morpha_event', $args );
-
+   if (!piklist_checker::check(__FILE__))
+   {
+     return;
+   }
+  }
 }
-
-// Hook into the 'init' action
-add_action( 'init', 'morpha_event_create_post_type', 0 );
+include('me-post-type.php');
+include('me-taxonomies.php');
 ?>
