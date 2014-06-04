@@ -104,11 +104,12 @@ function change_quick_edit_status() {
 
         // Change draft label
         var draftLabel = "Waiting Confirmation";
-        var draftCount = jQuery('li.draft a').text().split(' ')[1];
-        jQuery('li.draft a').text(draftLabel + ' ' +draftCount);
+        var selector = '#wpbody-content ul.subsubsub li.draft a';
+        var draftCount = jQuery(selector).text().split(' ')[1];
+        jQuery(selector).text(draftLabel + ' ' +draftCount);
 
         // Change draft post-state
-        jQuery('span.post-state:contains("Draft")').text('Waiting Confirmation');
+        jQuery('#the-list span.post-state:contains("Draft")').text('Waiting Confirmation');
       });
     </script>
   <?php
